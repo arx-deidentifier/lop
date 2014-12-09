@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ARX" default="release" basedir=".">
+
+    <description>Builds, tests, and runs the project.</description>
+
+    <!-- defines the version number -->
+    <property name="version" value="1.0.0" />
+
+
+    <!-- defines the to be included libraries -->
+    <fileset id="lib.jars" dir="lib">
+        <or>
+            <filename name="**/javassist.jar" />
+        </or>
+    </fileset>
+
+
+    <target name="release" depends="jars">
+    </target>
+
+    <target name="clean">
+        <delete dir="build/lib" failonerror="true" />
+        <delete dir="build/extLibs" failonerror="true" />
+        <delete dir="build" failonerror="true" />
+        <delete dir="jars" failonerror="true" />
+    </target>
+
+    <target name="prepare" depends="clean">
+        <mkdir dir="build" />
+        <mkdir dir="build/extLibs" />
+        <mkdir dir="build/lib" />
+        <mkdir dir="jars" />
+    </target>
+
+    <target name="compile" depends="prepare" description="compile the source ">
+        <javac srcdir="src/main/" destdir="build/lib" source="1.7">
+            <classpath>
+                <fileset refid="lib.jars" />
+                <path path="src/main" />
+            </classpath>
+        </javac>
+    </target>
+
+    <target name="buildExternalLibs">
+        <jar jarfile="build/extLibs/lib.jar">
+            <zipgroupfileset refid="lib.jars" />
+        </jar>
+    </target>
+
+    <target name="jars" depends="compile, buildExternalLibs">
+        
+        <jar destfile="jars/lop-${version}-src.jar">
+            <fileset dir="src/main" defaultexcludes="no" />
+        </jar>
+        
+        <jar destfile="jars/lop-${version}.jar">
+            <fileset dir="build/lib" defaultexcludes="no" />
+            <zipfileset src="build/extLibs/lib.jar" excludes="META-INF/*.RSA,META-INF/*.SF,META-INF/*.DSA" />
+            <manifest>
+                <attribute name="Manifest-Version" value="1.0" />
+                <attribute name="Premain-Class" value="org.deidentifier.arx.profiler.LowOverheadProfiler" />
+            </manifest>
+        </jar>
+        
+        <delete dir="build/lib" failonerror="true" />
+        <delete dir="build/extLibs" failonerror="true" />
+        <delete dir="build" failonerror="true" />
+    </target>
+</project>
