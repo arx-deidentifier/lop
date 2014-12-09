@@ -7,7 +7,7 @@ LOP is a very simplistic profiler for Java that uses bytecode instrumentation vi
 Usage
 ------
 
-1. Create a file profiler.properties in the root directory of your Java program.
+1. Create a file `profiler.properties` in the root directory of your Java program.
 2. In this file, add a set of lines following the scheme `<class-name>=<method-name-1>,<method-name-2>...`, for
 example `org.deidentifier.arx.example.Example=test1,test2`, telling LOP to profile the according methods of the
 given class. LOP will automatically handle aspects such as class hierarchies, method overloading etc for you.
