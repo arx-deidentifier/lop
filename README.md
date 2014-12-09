@@ -8,9 +8,9 @@ Usage
 ------
 
 1. Create a file profiler.properties in the root directory of your Java program.
-2. In this file, add a set of lines following the scheme `<class-name>=<method-name-1>,<method-name-2>...` 
-For example: `org.deidentifier.arx.example.Example=test1,test2`, telling LOP to profile the according methods of the
-given class. LOP will automatically handle aspects such as class hierarchies, method overloading etc. for you.
+2. In this file, add a set of lines following the scheme `<class-name>=<method-name-1>,<method-name-2>...`. For
+example: `org.deidentifier.arx.example.Example=test1,test2`, telling LOP to profile the according methods of the
+given class. LOP will automatically handle aspects such as class hierarchies, method overloading etc for you.
 3. Add the following parameter when launching the JVM: `-javaagent:lop-1.0.0.jar`.
 4. For JDK 7 and newer, also add: `-XX:-UseSplitVerifier`.
 
