@@ -14,7 +14,7 @@ given class. LOP will automatically handle aspects such as class hierarchies, me
 3. Add the following parameter when launching the JVM: `-javaagent:lop-1.0.0.jar`.
 4. For JDK 7 and newer, also add: `-XX:-UseSplitVerifier`.
 
-This will result in output, such as (see `org.deidentifier.arx.example.Example`):
+This will result in output such as (see `org.deidentifier.arx.example.Example`):
 
 ```Java
      Total time [ms] |     Invocation count | Method 
